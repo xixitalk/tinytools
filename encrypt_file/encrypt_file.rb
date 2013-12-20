@@ -32,8 +32,8 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-if File.exist?('config.json.win32')
-  cfg_file = File.open('config.json.win32')
+if File.exist?('config.json')
+  cfg_file = File.open('config.json')
   config =  JSON.parse(cfg_file.read)
   cfg_file.close
 end
