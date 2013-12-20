@@ -1,29 +1,29 @@
-## ¼ò½é
-ÀûÓÃopenssl¶ÔÎÄ¼ş¼Ğ½øĞĞ¶Ô³Æ¼ÓÃÜ£¨ÈçAES£©ºÍ½âÃÜruby½Å±¾
+## ç®€ä»‹
+åˆ©ç”¨opensslå¯¹æ–‡ä»¶å¤¹è¿›è¡Œå¯¹ç§°åŠ å¯†ï¼ˆå¦‚AESï¼‰å’Œè§£å¯†rubyè„šæœ¬
 
-## Ä¿µÄ
-±¾µØ±£»¤ÎÄ¼ş»òÕß±£»¤ÉÏ´«µ½ÔÆ¿Õ¼äµÄÎÄ¼ş
+## ç›®çš„
+æœ¬åœ°ä¿æŠ¤æ–‡ä»¶æˆ–è€…ä¿æŠ¤ä¸Šä¼ åˆ°äº‘ç©ºé—´çš„æ–‡ä»¶
 
-## ÃüÁîÓÃ·¨
+## å‘½ä»¤ç”¨æ³•
 * -i, --in DirOrFile               Source DirOrFile
 * -o, --out DirOrFile              Output DirOrFile
 * -D, --decrypt                    decrypt action
 * -p, --pass                       encrypt or decrypt password
 * -d, --debug                      debug mode
 
-Source DirOrFile:¶ÔÓÚ¼ÓÃÜÊÇÃ÷ÎÄÎÄ¼şÄ¿Â¼£¬¶ÔÓÚ½âÃÜÊÇ¼ÓÃÜÎÄ¼şÄ¿Â¼¡£Output DirOrFileÍ¬ÀíÏà·´¡£  
--D ÊÇÖ´ĞĞ½âÃÜ²Ù×÷£¬Ä¬ÈÏÊÇÖ´ĞĞ¼ÓÃÜ²Ù×÷¡£  
--p ÃüÁîÖĞ´úÈë¼ÓÃÜ»òÕß½âÃÜÃÜÂë  
+Source DirOrFile:å¯¹äºåŠ å¯†æ˜¯æ˜æ–‡æ–‡ä»¶ç›®å½•ï¼Œå¯¹äºè§£å¯†æ˜¯åŠ å¯†æ–‡ä»¶ç›®å½•ã€‚Output DirOrFileåŒç†ç›¸åã€‚  
+-D æ˜¯æ‰§è¡Œè§£å¯†æ“ä½œï¼Œé»˜è®¤æ˜¯æ‰§è¡ŒåŠ å¯†æ“ä½œã€‚  
+-p å‘½ä»¤ä¸­ä»£å…¥åŠ å¯†æˆ–è€…è§£å¯†å¯†ç   
 
-## ÅäÖÃconfig.json
-¿ÉÒÔÓÃconfig.jsonÀ´ĞŞ¸ÄÅäÖÃĞÅÏ¢  
-* openssl ÅäÖÃopensslÃüÁî
-* method  ÅäÖÃ¼Ó½âÃÜËã·¨
-* suffix  ¼ÓÃÜÎÄ¼şºó¸½¼ÓµÄºó×ºÃû
+## é…ç½®config.json
+å¯ä»¥ç”¨config.jsonæ¥ä¿®æ”¹é…ç½®ä¿¡æ¯  
+* openssl é…ç½®opensslå‘½ä»¤
+* method  é…ç½®åŠ è§£å¯†ç®—æ³•
+* suffix  åŠ å¯†æ–‡ä»¶åé™„åŠ çš„åç¼€å
 
-## Ö§³ÖµÄ¼Ó½âÃÜËã·¨
-config.jsonÀï`method`¿ÉÒÔÅäÖÃ¼ÓÃÜËã·¨  
-opensslÖ§³ÖµÄ¼Ó½âÃÜËã·¨¶¼¿ÉÒÔ£¬ÁĞ¾ÙÈçÏÂËã·¨£º
+## æ”¯æŒçš„åŠ è§£å¯†ç®—æ³•
+config.jsoné‡Œ`method`å¯ä»¥é…ç½®åŠ å¯†ç®—æ³•  
+opensslæ”¯æŒçš„åŠ è§£å¯†ç®—æ³•éƒ½å¯ä»¥ï¼Œåˆ—ä¸¾å¦‚ä¸‹ç®—æ³•ï¼š
 * base64             Base 64
 * bf-cbc             Blowfish in CBC mode
 * bf                 Alias for bf-cbc
@@ -81,9 +81,9 @@ opensslÖ§³ÖµÄ¼Ó½âÃÜËã·¨¶¼¿ÉÒÔ£¬ÁĞ¾ÙÈçÏÂËã·¨£º
 * aes-[128|192|256]-ecb  128/192/256 bit AES in ECB mode
 * aes-[128|192|256]-ofb  128/192/256 bit AES in OFB mode
 
-## windowsÆ½Ì¨
-windowsÆ½Ì¨¿ÉÒÔÊ¹ÓÃ×Ô´øµÄopenssl.exe£¬·½·¨ÊÇÓÃconfig.json.win32¸²¸Çconfig.json¡£
+## windowså¹³å°
+windowså¹³å°å¯ä»¥ä½¿ç”¨è‡ªå¸¦çš„openssl.exeï¼Œæ–¹æ³•æ˜¯ç”¨config.json.win32è¦†ç›–config.jsonã€‚
 
-## Ê¹ÓÃ¾ÙÀı
-¼ÓÃÜ£ºencrypt_file.rb -i src -o dest  
-½âÃÜ£ºencrypt_file.rb -i dest -o src2 -D
+## ä½¿ç”¨ä¸¾ä¾‹
+åŠ å¯†ï¼šencrypt_file.rb -i src -o dest  
+è§£å¯†ï¼šencrypt_file.rb -i dest -o src2 -D
