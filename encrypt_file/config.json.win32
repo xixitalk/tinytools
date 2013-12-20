@@ -1,5 +1,5 @@
 {
-    "openssl":"openssl",
+    "openssl":"./openssl_win32/openssl.exe",
     "method":"-aes-256-cbc",
     "suffix":".mm!"
 }

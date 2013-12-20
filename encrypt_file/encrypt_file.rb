@@ -8,6 +8,11 @@ options = {}
 options[:debug]=false
 options[:decrypt]=false
 
+if ARGV.size==0
+  puts "#{__FILE__} -h for more help"
+  exit(1)
+end
+
 OptionParser.new do |opts|
   opts.banner = 'here is help messages of the command line tool.'
   opts.on('-i DirOrFile', '--in DirOrFile', 'Source DirOrFile') do |value|
@@ -27,8 +32,8 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-if File.exist?('config.json')
-  cfg_file = File.open('config.json')
+if File.exist?('config.json.win32')
+  cfg_file = File.open('config.json.win32')
   config =  JSON.parse(cfg_file.read)
   cfg_file.close
 end
@@ -36,9 +41,11 @@ end
 if config.class == Hash
   OPENSSL_BIN=config['openssl']
   ENCRYPT_METHOD=config['method']
+  ENCRYPT_SUFFIX=config['suffix']
 else
   OPENSSL_BIN="openssl"
   ENCRYPT_METHOD="-aes-256-cbc"
+  ENCRYPT_SUFFIX=".mm!"
 end
 
 SOURCE_DIR=options[:input]
@@ -92,10 +99,10 @@ item_index = 1
 traverse_dir(SOURCE_DIR) { |onefile|
 	if DECRYPT_FLAG
 	  onefile2 = onefile.sub(SOURCE_DIR,OUTPUT_DIR)
-	  onefile2 = onefile2[0..-5]
+	  onefile2 = onefile2[0..(-(ENCRYPT_SUFFIX.size+1))]
 	else
-	  onefile2 = onefile.sub(SOURCE_DIR,OUTPUT_DIR) + ".aes"
-	end	
+	  onefile2 = onefile.sub(SOURCE_DIR,OUTPUT_DIR) + ENCRYPT_SUFFIX
+	end
 	onefile2_dir = File.dirname(onefile2)
 	if not Dir.exist?(onefile2_dir)
 		puts "#{onefile2_dir} is not exist,mkdir it" if DEBUG_FLAG

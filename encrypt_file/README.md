@@ -1,3 +1,26 @@
+## 简介
+利用openssl对文件夹进行对称加密（如AES）和解密脚本
+
+## 命令用法
+* -i, --in DirOrFile               Source DirOrFile
+* -o, --out DirOrFile              Output DirOrFile
+* -D, --decrypt                    decrypt action
+* -p, --pass                       encrypt or decrypt password
+* -d, --debug                      debug mode
+
+Source DirOrFile:对于加密是明文文件目录，对于解密是加密文件目录。DirOrFile同理相反。  
+-D 是执行解密操作，默认是执行加密操作。  
+-p 代入加密或者解密密码  
+
+## 配置config.json
+可以用config.json来修改配置信息  
+* openssl 配置openssl命令
+* method  配置加解密算法
+* suffix  加密文件后附加的后缀名
+
+## 支持的加解密算法
+config.json里`method`可以配置加密算法  
+openssl支持的加解密算法都可以，列举如下算法：
  base64             Base 64
  bf-cbc             Blowfish in CBC mode
  bf                 Alias for bf-cbc
@@ -54,3 +77,10 @@
  aes-[128|192|256]-cfb8 128/192/256 bit AES in 8 bit CFB mode
  aes-[128|192|256]-ecb  128/192/256 bit AES in ECB mode
  aes-[128|192|256]-ofb  128/192/256 bit AES in OFB mode
+
+## windows平台
+windows平台可以使用自带的openssl.exe，方法是用config.json.win32覆盖config.json。
+
+## 使用举例
+加密：encrypt_file.rb -i src -o dest
+解密：encrypt_file.rb -i dest -o src2 -D
