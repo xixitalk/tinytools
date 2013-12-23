@@ -18,7 +18,7 @@ OptionParser.new do |opts|
   opts.on('-i DirOrFile', '--in DirOrFile', 'Source DirOrFile') do |value|
     options[:input]=value
   end
-  opts.on('-o DirOrFile', '--out DirOrFile', 'Output DirOrFile') do |value|
+  opts.on('-o Dir', '--out Dir', 'Output Dir') do |value|
     options[:output]=value
   end
   opts.on('-D', '--decrypt', 'decrypt action') do
@@ -34,7 +34,7 @@ end.parse!
 
 if File.exist?('config.json')
   cfg_file = File.open('config.json')
-  config =  JSON.parse(cfg_file.read)
+  config = JSON.parse(cfg_file.read)
   cfg_file.close
 end
 
@@ -66,10 +66,10 @@ if SOURCE_DIR==nil or OUTPUT_DIR==nil
   exit(1)
 end
 if DEBUG_FLAG
-	puts "input:#{SOURCE_DIR}"
-	puts "output:#{OUTPUT_DIR}"
-	puts "encrypt method:#{ENCRYPT_METHOD}"
-    puts "action:#{ENCRYPT_ACTION}"
+  puts "input:#{SOURCE_DIR}"
+  puts "output:#{OUTPUT_DIR}"
+  puts "encrypt method:#{ENCRYPT_METHOD}"
+  puts "action:#{ENCRYPT_ACTION}"
 end
 
 def traverse_dir(file_path)
@@ -97,24 +97,25 @@ allFileCount = getDirFileCount(SOURCE_DIR)
 
 item_index = 1
 traverse_dir(SOURCE_DIR) { |onefile|
-	if DECRYPT_FLAG
-	  onefile2 = onefile.sub(SOURCE_DIR,OUTPUT_DIR)
-	  onefile2 = onefile2[0..(-(ENCRYPT_SUFFIX.size+1))]
-	else
-	  onefile2 = onefile.sub(SOURCE_DIR,OUTPUT_DIR) + ENCRYPT_SUFFIX
-	end
-	onefile2_dir = File.dirname(onefile2)
-	if not Dir.exist?(onefile2_dir)
-		puts "#{onefile2_dir} is not exist,mkdir it" if DEBUG_FLAG
-		FileUtils.mkdir_p(onefile2_dir)
-	end
+  onefile_dir = File.dirname(onefile)
+  if DECRYPT_FLAG
+    onefile2 = onefile.sub(onefile_dir,OUTPUT_DIR)
+    onefile2 = onefile2[0..(-(ENCRYPT_SUFFIX.size+1))]
+  else
+    onefile2 = onefile.sub(onefile_dir,OUTPUT_DIR) + ENCRYPT_SUFFIX
+  end
+  onefile2_dir = File.dirname(onefile2)
+  if not Dir.exist?(onefile2_dir)
+    puts "#{onefile2_dir} is not exist,mkdir it" if DEBUG_FLAG
+    FileUtils.mkdir_p(onefile2_dir)
+  end
    crypt_cmd = "#{OPENSSL_BIN} enc #{ENCRYPT_METHOD} -in \"#{onefile}\" -out \"#{onefile2}\" -k #{PASSWORD}"
    if DECRYPT_FLAG then crypt_cmd += " -d" end
-	#puts crypt_cmd
-	if system(crypt_cmd)
-		puts "#{item_index}/#{allFileCount} AES #{ENCRYPT_ACTION} #{onefile} ok"
-	else
-		puts "#{item_index}/#{allFileCount} AES #{ENCRYPT_ACTION} #{onefile} fail"
-	end
-	item_index += 1
+  #puts crypt_cmd
+  if system(crypt_cmd)
+    puts "#{item_index}/#{allFileCount} #{ENCRYPT_ACTION} #{onefile} ok"
+  else
+    puts "#{item_index}/#{allFileCount} #{ENCRYPT_ACTION} #{onefile} fail"
+  end
+  item_index += 1
 }
